@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Developer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base styles */
+        body {
+            background-color: #070709;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Scroll-Driven Reveal Effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) scale(0.96);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Canvas Overlay */
+        #canvas-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Glassmorphism card styles */
+        .glass-card {
+            background: rgba(18, 18, 24, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-purple-500 selection:text-white">
+
+    <!-- Interactive Canvas Overlay (Grid Generation + Dragon Skeleton) -->
+    <canvas id="canvas-overlay"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-card border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                ADITY UPADHYAY
+            </a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto px-6 pt-32 pb-24 space-y-36 relative z-10">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="reveal min-h-[70vh] flex flex-col justify-center items-start space-y-6">
+            <span class="px-3 py-1 text-xs font-semibold uppercase tracking-widest text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 rounded-full">
+                Developer & CS Student
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                Crafting Interactive <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+                    Web Experiences.
+                </span>
+            </h1>
+            <p class="max-w-2xl text-lg text-slate-400 leading-relaxed">
+                Welcome to my digital playground. Move your mouse around to awaken the dragon, or scroll up/down to see the environment render in real-time.
+            </p>
+            <div class="pt-4 flex gap-4">
+                <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:opacity-90 transition-opacity">
+                    View Projects
+                </a>
+                <a href="#contact" class="px-6 py-3 rounded-xl glass-card text-slate-200 font-semibold hover:bg-white/10 transition-colors">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT SECTION -->
+        <section id="about" class="reveal space-y-8">
+            <div class="border-l-4 border-purple-500 pl-4">
+                <h2 class="text-3xl font-bold text-white">About Me</h2>
+                <p class="text-slate-400 text-sm">Passionate about code, graphics, and performance</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-2xl space-y-4">
+                    <p class="text-slate-300 leading-relaxed">
+                        I am a Computer Science student with a focus on modern web development, creative coding, and responsive UI design. 
+                    </p>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        My focus is on bridging the gap between clean back-end logic and immersive front-end visual experiences using tools like React, Tailwind CSS, and HTML5 Canvas.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-center space-y-4 border-cyan-500/20">
+                    <h3 class="text-xl font-semibold text-cyan-400">Quick Highlights</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li class="flex items-center gap-2">✨ Currently learning prompt engineering</li>
+                        <li class="flex items-center gap-2">💻 Building open-source web applications</li>
+                        <li class="flex items-center gap-2">🚀 Focused on fast, high-performance web engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SKILLS SECTION -->
+        <section id="skills" class="reveal space-y-8">
+            <div class="border-l-4 border-cyan-400 pl-4">
+                <h2 class="text-3xl font-bold text-white">Tech Stack</h2>
+                <p class="text-slate-400 text-sm">Technologies and tools I work with</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div class="glass-card p-4 rounded-xl text-center hover:border-cyan-400/50 transition-colors">
+                    <span class="text-2xl">⚡</span>
+                    <h4 class="font-bold text-white mt-2">JavaScript</h4>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center hover:border-purple-400/50 transition-colors">
+                    <span class="text-2xl">⚛️</span>
+                    <h4 class="font-bold text-white mt-2">React / Next.js</h4>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center hover:border-cyan-400/50 transition-colors">
+                    <span class="text-2xl">🎨</span>
+                    <h4 class="font-bold text-white mt-2">Tailwind CSS</h4>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center hover:border-purple-400/50 transition-colors">
+                    <span class="text-2xl">📜</span>
+                    <h4 class="font-bold text-white mt-2">HTML5 / Canvas</h4>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center hover:border-cyan-400/50 transition-colors">
+                    <span class="text-2xl">🐍</span>
+                    <h4 class="font-bold text-white mt-2">Python</h4>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center hover:border-purple-400/50 transition-colors">
+                    <span class="text-2xl">🐙</span>
+                    <h4 class="font-bold text-white mt-2">Git / GitHub</h4>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center hover:border-purple-400/50 transition-colors">
+                    <span class="text-2xl">₱</span>
+                    <h4 class="font-bold text-white mt-2">PHP</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROJECTS SECTION -->
+        <section id="projects" class="reveal space-y-8">
+            <div class="border-l-4 border-pink-500 pl-4">
+                <h2 class="text-3xl font-bold text-white">Featured Projects</h2>
+                <p class="text-slate-400 text-sm">Some of my recent work</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Project Card 1 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-purple-500/50 transition-colors group">
+                    <div class="h-40 bg-purple-950/40 rounded-xl flex items-center justify-center border border-purple-800/30">
+                        <span class="text-purple-400 font-mono text-sm">[ Project Preview Image ]</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Interactive Web App</h3>
+                    <p class="text-slate-400 text-sm">A web application built with JavaScript and modern APIs featuring interactive UI state management.</p>
+                    <div class="flex gap-2 text-xs font-mono text-cyan-400">
+                        <span>#JavaScript</span> <span>#Tailwind</span> <span>#API</span>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-cyan-500/50 transition-colors group">
+                    <div class="h-40 bg-cyan-950/40 rounded-xl flex items-center justify-center border border-cyan-800/30">
+                        <span class="text-cyan-400 font-mono text-sm">[ Project Preview Image ]</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Canvas Animation Engine</h3>
+                    <p class="text-slate-400 text-sm">A lightweight physics simulation rendering dynamic interactive particle systems on HTML5 Canvas.</p>
+                    <div class="flex gap-2 text-xs font-mono text-purple-400">
+                        <span>#Canvas</span> <span>#Physics</span> <span>#Graphics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACT SECTION -->
+        <section id="contact" class="reveal space-y-8">
+            <div class="glass-card p-10 rounded-3xl text-center space-y-6 border-cyan-500/30">
+                <h2 class="text-4xl font-extrabold text-white">Let's Connect</h2>
+                <p class="text-slate-400 max-w-lg mx-auto">
+                    I am actively seeking internship opportunities, collaborative projects, or software engineering roles. Feel free to reach out!
+                </p>
+                <div class="flex justify-center gap-6 text-sm font-semibold">
+                    <a href="mailto:adityaupadhyay2590@gmail.com" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors">
+                        Send Email
+                    </a>
+                    <a href="https://github.com/adityupadhyay" target="_blank" class="px-6 py-3 rounded-xl glass-card text-white hover:bg-white/10 transition-colors">
+                        GitHub Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-xs text-slate-600 border-t border-white/5 relative z-10">
+        Built with HTML5 Canvas & Tailwind CSS • Designed by Adity Upadhyay
+    </footer>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        /* ===================================================
+           1. SCROLL-DRIVEN REVEAL OBSERVER
+           =================================================== */
+        const observerOptions = {
+            root: null,
+            threshold: 0.0015,
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(section => {
+            revealObserver.observe(section);
+        });
+
+        /* ===================================================
+           2. CANVAS ENGINE: PAGE GENERATION GRID & DRAGON
+           =================================================== */
+        const canvas = document.getElementById('canvas-overlay');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // SCROLL VELOCITY ENGINE (PAGE GENERATION VISUAL)
+        let lastScrollY = window.scrollY;
+        let scrollVelocity = 0;
+        let gridOffsetY = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            scrollVelocity = currentScrollY - lastScrollY;
+            lastScrollY = currentScrollY;
+        });
+
+        // GENERATION PARTICLES & BEAMS
+        const beams = [];
+        const numBeams = 35;
+        for (let i = 0; i < numBeams; i++) {
+            beams.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                length: Math.random() * 80 + 20,
+                speed: Math.random() * 2 + 1,
+                size: Math.random() * 2 + 1,
+                color: Math.random() > 0.5 ? '#22d3ee' : '#a855f7'
+            });
+        }
+
+        // MOUSE & DRAGON FADE MECHANICS
+        const mouse = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+        };
+
+        let isMoving = false;
+        let hideTimer = null;
+        let dragonOpacity = 0;
+
+        function handlePointerMove(x, y) {
+            mouse.x = x;
+            mouse.y = y;
+            isMoving = true;
+
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                isMoving = false;
+            }, 1200);
+        }
+
+        window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+        });
+
+        // DRAGON SEGMENTS
+        const numSegments = 22;
+        const segmentLength = 14;
+        const joints = [];
+        for (let i = 0; i < numSegments; i++) {
+            joints.push({ x: mouse.x, y: mouse.y, angle: 0 });
+        }
+
+        /* MAIN ANIMATION LOOP */
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // --- A. PAGE GENERATION GRID & BEAMS ---
+            // Decay scroll velocity smoothly
+            scrollVelocity *= 0.92;
+            gridOffsetY = (gridOffsetY - scrollVelocity * 0.8) % 40;
+
+            // Draw Subtle Futuristic Grid
+            ctx.strokeStyle = 'rgba(34, 211, 238, 0.04)';
+            ctx.lineWidth = 1;
+
+            const gridSize = 40;
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            for (let y = gridOffsetY; y < canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            // Draw Beams (Speed up & stretch when scrolling up/down)
+            const speedMultiplier = 1 + Math.abs(scrollVelocity) * 0.15;
+            const scrollDirection = scrollVelocity >= 0 ? 1 : -1;
+
+            beams.forEach(beam => {
+                // Adjust position based on base speed + scroll boost
+                beam.y -= (beam.speed * speedMultiplier) * (scrollVelocity !== 0 ? Math.sign(scrollVelocity) : 1);
+
+                // Wrap around screen
+                if (beam.y < -100) beam.y = canvas.height + 100;
+                if (beam.y > canvas.height + 100) beam.y = -100;
+
+                const currentLength = beam.length * (1 + Math.abs(scrollVelocity) * 0.05);
+
+                ctx.save();
+                ctx.strokeStyle = beam.color;
+                ctx.globalAlpha = Math.min(0.2 + Math.abs(scrollVelocity) * 0.03, 0.8);
+                ctx.lineWidth = beam.size;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = beam.color;
+
+                ctx.beginPath();
+                ctx.moveTo(beam.x, beam.y);
+                ctx.lineTo(beam.x, beam.y + currentLength);
+                ctx.stroke();
+                ctx.restore();
+            });
+
+            // --- B. DRAGON SKELETON (MOUSE ACTIVE ONLY) ---
+            if (isMoving) {
+                dragonOpacity = Math.min(dragonOpacity + 0.08, 1);
+            } else {
+                dragonOpacity = Math.max(dragonOpacity - 0.04, 0);
+            }
+
+            if (dragonOpacity > 0) {
+                joints[0].x += (mouse.x - joints[0].x) * 0.25;
+                joints[0].y += (mouse.y - joints[0].y) * 0.25;
+
+                for (let i = 1; i < numSegments; i++) {
+                    const prev = joints[i - 1];
+                    const current = joints[i];
+
+                    const dx = prev.x - current.x;
+                    const dy = prev.y - current.y;
+                    current.angle = Math.atan2(dy, dx);
+
+                    current.x = prev.x - Math.cos(current.angle) * segmentLength;
+                    current.y = prev.y - Math.sin(current.angle) * segmentLength;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = dragonOpacity;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = '#06b6d4';
+
+                for (let i = numSegments - 1; i >= 0; i--) {
+                    const joint = joints[i];
+
+                    ctx.save();
+                    ctx.translate(joint.x, joint.y);
+                    ctx.rotate(joint.angle);
+
+                    if (i === 0) {
+                        // Skull
+                        ctx.fillStyle = '#a855f7';
+                        ctx.beginPath();
+                        ctx.moveTo(12, 0);
+                        ctx.lineTo(-6, -8);
+                        ctx.lineTo(-2, 0);
+                        ctx.lineTo(-6, 8);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        // Glowing Eyes
+                        ctx.fillStyle = '#22d3ee';
+                        ctx.beginPath();
+                        ctx.arc(4, -3, 2, 0, Math.PI * 2);
+                        ctx.arc(4, 3, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else if (i < numSegments - 2) {
+                        // Ribs
+                        const progress = i / numSegments;
+                        const ribWidth = Math.sin(progress * Math.PI) * 16;
+
+                        ctx.strokeStyle = '#22d3ee';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.moveTo(-segmentLength / 2, 0);
+                        ctx.lineTo(segmentLength / 2, 0);
+                        ctx.stroke();
+
+                        ctx.strokeStyle = 'rgba(168, 85, 247, 0.7)';
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -ribWidth);
+                        ctx.lineTo(0, ribWidth);
+                        ctx.stroke();
+                    } else {
+                        // Tail Tip
+                        ctx.fillStyle = '#22d3ee';
+                        ctx.beginPath();
+                        ctx.arc(0, 0, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    ctx.restore();
+                }
+
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
