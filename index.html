@@ -48,7 +48,7 @@
 </head>
 <body class="font-sans antialiased selection:bg-purple-500 selection:text-white">
 
-    <!-- Interactive Canvas Overlay (Grid Generation + Dragon Skeleton) -->
+    <!-- Interactive Canvas Overlay (Grid Generation + Desktop Dragon Skeleton) -->
     <canvas id="canvas-overlay"></canvas>
 
     <!-- Header Navigation -->
@@ -197,7 +197,7 @@
                     I am actively seeking internship opportunities, collaborative projects, or software engineering roles. Feel free to reach out!
                 </p>
                 <div class="flex justify-center gap-6 text-sm font-semibold">
-                    <a href="mailto:adityaupadhyay2590@gmail.com" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors">
+                    <a href="mailto:your.email@example.com" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors">
                         Send Email
                     </a>
                     <a href="https://github.com/adityupadhyay" target="_blank" class="px-6 py-3 rounded-xl glass-card text-white hover:bg-white/10 transition-colors">
@@ -221,7 +221,7 @@
            =================================================== */
         const observerOptions = {
             root: null,
-            threshold: 0.0015,
+            threshold: 0.15,
         };
 
         const revealObserver = new IntersectionObserver((entries) => {
@@ -241,6 +241,11 @@
            =================================================== */
         const canvas = document.getElementById('canvas-overlay');
         const ctx = canvas.getContext('2d');
+
+        // Check if the device is a Desktop / Laptop (Screen width > 768px & has a precise mouse/pointer)
+        const isDesktopDevice = () => {
+            return window.innerWidth >= 768 && window.matchMedia('(pointer: fine)').matches;
+        };
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -285,6 +290,9 @@
         let dragonOpacity = 0;
 
         function handlePointerMove(x, y) {
+            // Only activate mouse tracking if on a PC / Desktop device
+            if (!isDesktopDevice()) return;
+
             mouse.x = x;
             mouse.y = y;
             isMoving = true;
@@ -296,9 +304,6 @@
         }
 
         window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY));
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-        });
 
         // DRAGON SEGMENTS
         const numSegments = 22;
@@ -312,8 +317,7 @@
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // --- A. PAGE GENERATION GRID & BEAMS ---
-            // Decay scroll velocity smoothly
+            // --- A. PAGE GENERATION GRID & BEAMS (Works on ALL Devices) ---
             scrollVelocity *= 0.92;
             gridOffsetY = (gridOffsetY - scrollVelocity * 0.8) % 40;
 
@@ -336,15 +340,12 @@
                 ctx.stroke();
             }
 
-            // Draw Beams (Speed up & stretch when scrolling up/down)
+            // Draw Beams (Speed up & stretch when scrolling)
             const speedMultiplier = 1 + Math.abs(scrollVelocity) * 0.15;
-            const scrollDirection = scrollVelocity >= 0 ? 1 : -1;
 
             beams.forEach(beam => {
-                // Adjust position based on base speed + scroll boost
                 beam.y -= (beam.speed * speedMultiplier) * (scrollVelocity !== 0 ? Math.sign(scrollVelocity) : 1);
 
-                // Wrap around screen
                 if (beam.y < -100) beam.y = canvas.height + 100;
                 if (beam.y > canvas.height + 100) beam.y = -100;
 
@@ -364,14 +365,14 @@
                 ctx.restore();
             });
 
-            // --- B. DRAGON SKELETON (MOUSE ACTIVE ONLY) ---
-            if (isMoving) {
+            // --- B. DRAGON SKELETON (ONLY RUNS ON DESKTOP / PC) ---
+            if (isDesktopDevice() && isMoving) {
                 dragonOpacity = Math.min(dragonOpacity + 0.08, 1);
             } else {
                 dragonOpacity = Math.max(dragonOpacity - 0.04, 0);
             }
 
-            if (dragonOpacity > 0) {
+            if (dragonOpacity > 0 && isDesktopDevice()) {
                 joints[0].x += (mouse.x - joints[0].x) * 0.25;
                 joints[0].y += (mouse.y - joints[0].y) * 0.25;
 
